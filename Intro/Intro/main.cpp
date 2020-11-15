@@ -64,6 +64,12 @@ public:
 		this->y = y;
 		cout << "Constructor:\t" << this << endl;
 	}
+	Point(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyConstructor:" << this << endl;
+	}
 	~Point()
 	{
 		cout << "Destructor:\t" << this << endl;
@@ -73,7 +79,23 @@ public:
 	{
 		cout << "X = " << this->x << "\tY = " << this->y << ";\n";
 	}
+
+	double distance(const Point& other)const
+	{
+		double x_distance = this->x - other.x;
+		double y_distance = this->y - other.y;
+		double distance = sqrt(x_distance * x_distance + y_distance * y_distance);
+		return distance;
+	}
 };
+
+double distance(const Point& A, const Point& B)
+{
+	double x_distance = A.get_x() - B.get_x();
+	double y_distance = A.get_y() - B.get_y();
+	double distance = sqrt(pow(x_distance, 2) + pow(y_distance, 2));
+	return distance;
+}
 
 //#define BASICS
 
@@ -106,6 +128,20 @@ void main()
 	Point B(5, 2);
 	B.print();
 
-	Point C = 5;
-	C.print();
+	//Point C = 5;
+	//C.print();
+
+	Point CC = B;	//Copy constructor
+	CC.print();
+
+	cout << "\n====================== Method ==========================\n" << endl;
+	cout << A.distance(B) << endl;
+	cout << B.distance(A) << endl;
+	cout << "\n===================== Function =========================\n" << endl;
+	cout << distance(A, B) << endl;
+	cout << "\n======================== End ===========================\n" << endl;
+	cout << sizeof(Point) << endl;
+
+	A.print();
+	B.print();
 }
