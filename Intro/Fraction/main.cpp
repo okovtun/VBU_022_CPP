@@ -1,5 +1,13 @@
 #include<iostream>
 using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
+
+class Fraction;
+inline Fraction operator-(Fraction left, Fraction right);
+inline Fraction operator*(Fraction left, Fraction right);
+inline Fraction operator/(Fraction left, Fraction right);
 
 class Fraction
 {
@@ -81,6 +89,30 @@ public:
 		cout << "CopyAssignment:" << this << endl;
 		return *this;
 	}
+	Fraction& operator*=(const Fraction& other)
+	{
+		return *this = *this * other;
+	}
+	Fraction& operator/=(const Fraction& other)
+	{
+		return *this = *this / other;
+	}
+
+	//			Increment/Decrement
+	Fraction& operator++()	//Prefix increment
+	{
+		integer++;
+		return *this;
+	}
+	Fraction operator++(int)	//Suffix increment
+	{
+		/*Fraction old = *this;
+		integer++;
+		return old;*/
+		integer++;
+		(*this - 1).print();
+		return (*this - 1);
+	}
 
 	//			Methods:
 	void print()const
@@ -102,9 +134,117 @@ public:
 		cout << "Numerator:\t" << &numerator << "\n";
 		cout << "Denominator:\t" << &denominator << "\n";
 	}
+	Fraction& to_proper()
+	{
+		integer += numerator / denominator;
+		numerator %= denominator;
+		return *this;
+	}
+	Fraction& to_improper()
+	{
+		numerator += integer * denominator;
+		integer = 0;
+		return *this;
+	}
+	Fraction inverted()
+	{
+		this->to_improper();
+		/*Fraction inverted(denominator, numerator);
+		return inverted;*/
+		return Fraction(denominator, numerator);
+	}
+	Fraction& reduce()
+	{
+		//Сокращение дроби по алгоритму Евклида.
+		int more, less, rest;
+		if (numerator < denominator)
+		{
+			less = numerator;
+			more = denominator;
+		}
+		else
+		{
+			less = denominator;
+			more = numerator;
+		}
+		/*do
+		{
+			rest = more % less;
+			more = less;
+			less = rest;
+		} while (rest);*/
+		for (rest = 1; rest; more = less, less = rest)
+			rest = more % less;
+		int GCD = more;	//GCD - Greatest Common Dividor (Наибольший общий делитель - НОД)
+		numerator /= GCD;
+		denominator /= GCD;
+		return *this;
+	}
 };
 
+inline Fraction operator-(Fraction left, Fraction right)
+{
+	Fraction result(
+		left.get_integer() - right.get_integer(),
+		left.get_numerator() * right.get_denomiantor() - right.get_numerator() * left.get_denomiantor(),
+		left.get_denomiantor() * right.get_denomiantor()
+	);
+	return result.to_proper().reduce();
+}
+
+inline Fraction operator*(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	Fraction result(left.get_numerator() * right.get_numerator(), left.get_denomiantor() * right.get_denomiantor());
+	/*result.set_numerator(left.get_numerator() * right.get_numerator());
+	result.set_denominator(left.get_denomiantor() * right.get_denomiantor());*/
+	//result.to_proper();
+	return result.to_proper().reduce();
+}
+Fraction operator/(Fraction left, Fraction right)
+{
+	return left * right.inverted();
+}
+
+bool operator==(const Fraction& left, const Fraction& right)
+{
+	/*if (left.get_integer() == right.get_integer() &&
+		left.get_numerator() == right.get_numerator() &&
+		left.get_denomiantor() == right.get_denomiantor())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}*/
+
+	return left.get_integer() == right.get_integer() &&
+		left.get_numerator() == right.get_numerator() &&
+		left.get_denomiantor() == right.get_denomiantor();
+}
+
+ostream& operator<<(ostream& os, const Fraction& obj)
+{
+	if (obj.get_integer())cout << obj.get_integer();
+	if (obj.get_numerator())
+	{
+		if (obj.get_integer())cout << "(";
+		cout << obj.get_numerator() << "/" << obj.get_denomiantor();
+		if (obj.get_integer())cout << ")";
+	}
+	if (obj.get_integer() == 0 && obj.get_numerator() == 0)cout << 0;
+	return os;
+}
+
 //#define CONSTRUCTORS_CHECK
+//#define ASSIGNMENT_CHECK
+//#define ARITHMETIC_OPERATORS_CHECK
+//#define INCREMENT_CHECK
+
+#define delimiter "\n---------------------------------------\n";
+#define PI 3.14
 
 void main()
 {
@@ -127,6 +267,7 @@ void main()
 	D.print_address();
 #endif // CONSTRUCTORS_CHECK
 
+#ifdef ASSIGNMENT_CHECK
 	int a, b, c;
 	a = b = c = 0;
 
@@ -141,7 +282,49 @@ void main()
 	//B.print();
 	//Fraction C;
 	//C = A;	//CopyAssignment (operator=)
-	//C.print();
+	//C.print();  
+#endif // ASSIGNMENT_CHECK
+
+#if defined ARITHMETIC_OPERATORS_CHECK
+	PI;
+	int a = 2;
+	int b = 3;
+	//int c = a * b;
+	//cout << c << endl;
+	a *= b;
+	Fraction A(2, 3, 4);
+	Fraction B(5, 7, 8);
+	//Fraction C = A * B;	C.print();
+	//A *= B;	A.print();
+	//Fraction C = A / B; C.print();
+	A /= B;
+	A.print();
+	A.reduce().print();
+	A.print();
+#endif
+
+#ifdef INCREMENT_CHECK
+	for (double i = 0.25; i < 15; i++)
+	{
+		cout << i << "\t";
+	}
+	cout << endl;
+	cout << "\n----------------------------------------\n";
+	//(Fraction(1, 1) - Fraction(1, 4)).print();
+	(Fraction(2, 4) - Fraction(1, 4)).print();
+	cout << "\n----------------------------------------\n";
+	Fraction i(1, 2);
+	Fraction j = i++;
+	i.print();
+	j.print();
+#endif // INCREMENT_CHECK
+
+	Fraction A(4, 1, 2);
+	cout << delimiter;
+	cout << A << endl;
+	cout << delimiter;
+	Fraction B = A;	//Copy constructor
+	cout << (A == B) << endl;
 }
 /*
 ---------------------------------
@@ -159,7 +342,7 @@ int operator+(Cat other)
 2. НЕ все существующие оперторы можно перегрузить. Не перегружаются
 	?: - тернарный оператор;
 	.  - оператор прямого доступа;
-	.* 
+	.*
 	:: - оператор разрешения видимости
 	#
 	##

@@ -2,7 +2,7 @@ https://www.youtube.com/watch?v=keX4ivr9Ytc&list=PLeqyOOqxeiINBBW5KUmcf-M4_wfb4y
 https://github.com/okovtun/VBU_022_CPP
 
 TODO:
-1. В класс Fraction добавить методы:
+1. В класс Fraction добавить методы: DONE
 	to_proper() - преобразует неправильную дробь в правильную;
 	to_improper()-преобразует правильную дробь в неправильную;
 	reduce() - сокращает дробь;
@@ -10,6 +10,8 @@ TODO:
 	+, -, *, /;
 	+=, -=, *=, /=;
 	==, !=, >, <, >=, <=;
+3. Перегрузить оператор >> для ввода дробей с клавиатуры.
+
 
 DONE:
 1. В классе Point реализовать метод distance, который вычисляет расстояние до указанной точки;
