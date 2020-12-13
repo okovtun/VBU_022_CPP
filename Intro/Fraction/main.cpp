@@ -4,6 +4,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+
 class Fraction;
 inline Fraction operator-(Fraction left, Fraction right);
 inline Fraction operator*(Fraction left, Fraction right);
@@ -110,9 +111,21 @@ public:
 		integer++;
 		return old;*/
 		integer++;
-		(*this - 1).print();
-		return (*this - 1);
+		(*this - (Fraction)1).print();
+		return (*this - (Fraction)1);
 	}
+
+	//			Type cast operators:
+	explicit operator int()
+	{
+		this->to_proper();
+		return integer;
+	}
+	explicit operator double()
+	{
+		return integer + (double)numerator / denominator;
+	}
+	
 
 	//			Methods:
 	void print()const
@@ -238,10 +251,13 @@ ostream& operator<<(ostream& os, const Fraction& obj)
 	return os;
 }
 
+
+
 //#define CONSTRUCTORS_CHECK
 //#define ASSIGNMENT_CHECK
 //#define ARITHMETIC_OPERATORS_CHECK
 //#define INCREMENT_CHECK
+//#define COMPARISON_CHECK
 
 #define delimiter "\n---------------------------------------\n";
 #define PI 3.14
@@ -319,12 +335,34 @@ void main()
 	j.print();
 #endif // INCREMENT_CHECK
 
+#ifdef COMPARISON_CHECK
 	Fraction A(4, 1, 2);
 	cout << delimiter;
 	cout << A << endl;
 	cout << delimiter;
 	Fraction B = A;	//Copy constructor
 	cout << (A == B) << endl;
+#endif // COMPARISON_CHECK
+
+
+	//double a = 2;
+	//cout << (int)a << endl;//C-like notation
+	//cout << int(a) << endl;//Functional notation
+	//int b = a;
+	//cout << b << endl;
+	//cout << typeid(2 + 3.5).name() << endl;
+	//cout << (double)7 / 2 << endl;
+
+	//Single argument constructor
+
+	int a = 2;		//No conversion
+	double b = 3;	//From less to more
+	Fraction A = (Fraction)5;	//Single argument constructor
+	Fraction B;		//Default constructor
+	B = (Fraction)8;
+	Fraction C(2, 1, 2);
+	double d = (double)C;
+	cout << d << endl;
 }
 /*
 ---------------------------------
@@ -350,3 +388,8 @@ int operator+(Cat other)
 4. Нельзя изменить поведение операторов со свтроенными типами.
 ---------------------------------
 */
+
+//operator type()
+//{
+//	
+//}
