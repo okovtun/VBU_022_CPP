@@ -2,6 +2,10 @@ https://www.youtube.com/watch?v=keX4ivr9Ytc&list=PLeqyOOqxeiINBBW5KUmcf-M4_wfb4y
 https://github.com/okovtun/VBU_022_CPP
 
 TODO:
+¬ класс String добавить опрераторы =, +, +=, [], а так же MoveConstructor и MoveAssignment.
+http://cplusplus.com/doc/tutorial/classes2/
+
+DONE:
 1. ¬ класс Fraction добавить методы: DONE
 	to_proper() - преобразует неправильную дробь в правильную;
 	to_improper()-преобразует правильную дробь в неправильную;
