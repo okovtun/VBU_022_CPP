@@ -2,6 +2,9 @@
 #include<string.h>
 using namespace std;
 
+class String;
+String operator+(const String& left, const String& right);
+
 class String
 {
 	int size;	//Размер строки в Байтах
@@ -76,6 +79,10 @@ public:
 		cout << "MoveAssignment:" << this << endl;
 		return *this;
 	}
+	String& operator+=(const String& other)
+	{
+		return *this = *this + other;
+	}
 
 	const char& operator[](int i)const
 	{
@@ -126,6 +133,7 @@ String operator+(const String& left, const String& right)
 
 //#define CONSTRUCTORS_CHECK
 //#define ASSIGNMENT_CHECK
+//#define OPERATOR_PLUS_CHECK
 
 void main()
 {
@@ -154,8 +162,7 @@ void main()
 	str1.print();
 #endif // ASSIGNMENT_CHECK
 
-
-
+#ifdef OPERATOR_PLUS_CHECK
 	String str1 = "Hello";
 	String str2 = "World";
 	cout << str1 << endl;
@@ -173,4 +180,10 @@ void main()
 	cout << "Введите Ваше имя: ";
 	cin >> name;
 	cout << name << endl;;*/
+#endif // OPERATOR_PLUS_CHECK
+
+	String str1 = "Hello";
+	String str2 = "World";
+	str1 += str2;
+	cout << str1 << endl;
 }
