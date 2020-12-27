@@ -1,7 +1,14 @@
 https://www.youtube.com/watch?v=keX4ivr9Ytc&list=PLeqyOOqxeiINBBW5KUmcf-M4_wfb4yqKp&index=1&t=205s
 https://github.com/okovtun/VBU_022_CPP
 
+TOREAD:
+http://cplusplus.com/doc/tutorial/inheritance/
+http://cplusplus.com/doc/tutorial/polymorphism/
+
 TODO:
+1. Реализовать класс Binary, описывающий двоичное число, обеспечить арифметические (+, -, *, /) и побитовые    (& AND, | OR, ~ NOT, ^ XOR) операции над двоичными числами. Двоичное число можно инициализировать десятичным числом, или ввести с клавиатуры. Нужны только целые двоичные числа.
+
+DONE:
 В класс String добавить опрераторы =, +, +=, [], а так же MoveConstructor и MoveAssignment.
 http://cplusplus.com/doc/tutorial/classes2/
 
