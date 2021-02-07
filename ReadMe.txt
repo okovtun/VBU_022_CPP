@@ -1,11 +1,31 @@
 https://www.youtube.com/watch?v=keX4ivr9Ytc&list=PLeqyOOqxeiINBBW5KUmcf-M4_wfb4yqKp&index=1&t=205s
 https://github.com/okovtun/VBU_022_CPP
 
+TODO:
+В класс List добавить методы:
+void pop_front();	//Удаляет начальный элемент списка
+void pop_back();	//Удаляет последний элемент списка
+void erase(int index);	//Удаляет значение из списка по указанному индексу
+void Sort();		//Сортировка списка;
+
+CopyMethods: CopyConstructor; CopyAssignment (=);
+MoveMethods: MoveConstructor; MoveAssignment;
+operator+ - выполняет конкатенацию двух списков;
+Конструктор на заданное число элементов;
+operator[];
+
+//Этот проверочный код должен заработать
+List list = {3,5,8,13,21};
+for(int i:list)
+	cout << i << tab;
+cout << endl;
+///////////////////////////////////////////////////////////////
+
 TOREAD:
 http://cplusplus.com/doc/tutorial/inheritance/
 http://cplusplus.com/doc/tutorial/polymorphism/
 
-TODO:
+DONE:
 1. Реализовать фигуры: Квадрат, Прямоугольник, Треугольник, Круг.
 У каждой фигуры есть цвет, площадь и периметр, и особые свойства конкретной фигуры.
 Сгенерировать фигуры случайным образом, и вывести на экран их свойства, и нарисовать эти фигуры.
