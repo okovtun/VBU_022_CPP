@@ -12,12 +12,18 @@ public:
 	Element(int Data, Element* pNext = nullptr) :Data(Data), pNext(pNext)
 	{
 		count++;
+#ifdef DEBUG
 		cout << "EConstructor:\t" << this << endl;
+#endif // DEBUG
+
 	}
 	~Element()
 	{
 		count--;
+#ifdef DEBUG
 		cout << "EDestructor:\t" << this << endl;
+#endif // DEBUG
+
 	}
 	friend class List;
 	friend class Iterator;
@@ -31,11 +37,17 @@ class Iterator
 public:
 	Iterator(Element* Temp) :Temp(Temp)
 	{
+#ifdef DEBUG
 		cout << "IConstrictor:\t" << this << endl;
+#endif // DEBUG
+
 	}
 	~Iterator()
 	{
+#ifdef DEBUG
 		cout << "IDestructor:\t" << endl;
+#endif // DEBUG
+
 	}
 	Iterator& operator++()	//Prefix increment
 	{
@@ -103,7 +115,7 @@ public:
 		while (size--)
 			push_front(0);
 	}
-	List(const List& other)
+	List(const List& other):List()
 	{
 		Element* Temp = other.Head;
 		while (Temp)
@@ -111,7 +123,14 @@ public:
 			push_back(Temp->Data);
 			Temp = Temp->pNext;
 		}
-		cout << "CopyConstructor:\t" << this << endl;
+		cout << "CopyConstructor:" << this << endl;
+	}
+	List(List&& other)
+	{
+		this->Head = other.Head;
+		this->size = other.size;
+		other.Head = nullptr;
+		cout << "MoveConstructor:" << this << endl;
 	}
 	List(const initializer_list<int> il) :List()
 	{
@@ -131,10 +150,20 @@ public:
 	//			Operators:
 	List& operator=(const List& other)
 	{
+		if (this == &other)return *this;
 		while (Head)pop_front();
 		for (Element* Temp = other.Head; Temp != nullptr; Temp = Temp->pNext)
 			push_back(Temp->Data);
 		cout << "CopyAssignment:\t" << this << endl;
+		return *this;
+	}
+	List& operator=(List&& other)
+	{
+		while (Head)pop_front();
+		this->Head = other.Head;
+		this->size = other.size;
+		other.Head = nullptr;
+		cout << "MoveAssignment: " << this << endl;
 		return *this;
 	}
 	int& operator[](const int index)
@@ -230,6 +259,17 @@ public:
 	}
 };
 
+List operator+(const List& left, const List& right)
+{
+	List cat(left);	//Результат сложения
+	for (Iterator it = right.begin(); it != right.end(); it++)
+	{
+		cat.push_back(*it);
+	}
+	cout << "Operator+:\t"  << endl;
+	return cat;
+}
+
 //#define BASE_CHECK
 //#define COUNT_CHECK
 
@@ -284,9 +324,29 @@ void main()
 	list2 = list;
 	list2.print();
 #endif // COUNT_CHECK
+	int a = 2;
+	int b = 3;
+	int c = a + b;
 
 	List list = { 3,5,8,13,21 };
 	//list.print();
 	for (int i : list)
 		cout << i << tab;
+	cout << endl;
+
+	List list2 = { 34,55,89 };
+	for (Iterator it = list2.begin(); it != list2.end(); it++)
+		cout << *it << tab;
+	cout << endl;
+
+	List list3 = { 144, 233, 377 };
+	list3.print();
+	List list4 = list3;
+	list4.print();
+	cout << "\n---------------------------------------------------------\n";
+	List list5;
+	list5 = list + list2 + list3;
+	cout << "\n---------------------------------------------------------\n";
+	list5 = list5;
+	list5.print();
 }
