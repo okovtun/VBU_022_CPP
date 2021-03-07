@@ -2,7 +2,14 @@
 https://github.com/okovtun/VBU_022_CPP
 
 TODO:
-Реализовать класс List, описывающий двусвязный список.
+В класс List, добавить методы:
+void erase(int index);	//Удаляет элемент по индексу
+CopyMethods();
+MoveMethods();
+operator+();
+Iterator;		DONE
+ReverseIterator;//Методы rbegin() и rend() должны возращать ReverseIterator
+Создать ветку templated и в ней шаблонизировать классы List и ForwardList.
 
 DONE:
 В класс List добавить методы:

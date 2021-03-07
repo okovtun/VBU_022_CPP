@@ -272,6 +272,7 @@ List operator+(const List& left, const List& right)
 
 //#define BASE_CHECK
 //#define COUNT_CHECK
+//#define OPERATOR_PLUS_CHECK
 
 void main()
 {
@@ -324,6 +325,7 @@ void main()
 	list2 = list;
 	list2.print();
 #endif // COUNT_CHECK
+#ifdef OPERATOR_PLUS_CHECK
 	int a = 2;
 	int b = 3;
 	int c = a + b;
@@ -349,4 +351,12 @@ void main()
 	cout << "\n---------------------------------------------------------\n";
 	list5 = list5;
 	list5.print();
+#endif // OPERATOR_PLUS_CHECK
+	List list(n);
+	cout << "Память выделена, загружаем данные..." << endl;
+	/*for (int i = 0; i < n; i++)
+		list[i] = rand();*/
+	for (Iterator it = list.begin(); it != list.end(); it++)
+		*it = rand();
+	cout << "Данные загружены" << endl;
 }
