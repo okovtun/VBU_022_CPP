@@ -2,6 +2,13 @@
 https://github.com/okovtun/VBU_022_CPP
 
 TODO:
+В BinaryTree добавить:
+CopyAssignment();
+ILconstructor;	//Tree t = {3, 5, ....};
+erase(int Data);//Удаляет заданное значение из дерева
+Шаблонизировать дерево.
+
+DONE:
 В класс List, добавить методы:
 void erase(int index);	//Удаляет элемент по индексу
 CopyMethods();
