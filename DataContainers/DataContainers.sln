@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "List2", "List2\List2.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinaryTree", "BinaryTree\BinaryTree.vcxproj", "{19EC709A-DD3E-4B5B-A0C0-4093FE460E75}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HomeTree", "HomeTree\HomeTree.vcxproj", "{7A289C51-7DBB-4FD9-8201-EE75D3C50ACA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{19EC709A-DD3E-4B5B-A0C0-4093FE460E75}.Release|x64.Build.0 = Release|x64
 		{19EC709A-DD3E-4B5B-A0C0-4093FE460E75}.Release|x86.ActiveCfg = Release|Win32
 		{19EC709A-DD3E-4B5B-A0C0-4093FE460E75}.Release|x86.Build.0 = Release|Win32
+		{7A289C51-7DBB-4FD9-8201-EE75D3C50ACA}.Debug|x64.ActiveCfg = Debug|x64
+		{7A289C51-7DBB-4FD9-8201-EE75D3C50ACA}.Debug|x64.Build.0 = Debug|x64
+		{7A289C51-7DBB-4FD9-8201-EE75D3C50ACA}.Debug|x86.ActiveCfg = Debug|Win32
+		{7A289C51-7DBB-4FD9-8201-EE75D3C50ACA}.Debug|x86.Build.0 = Debug|Win32
+		{7A289C51-7DBB-4FD9-8201-EE75D3C50ACA}.Release|x64.ActiveCfg = Release|x64
+		{7A289C51-7DBB-4FD9-8201-EE75D3C50ACA}.Release|x64.Build.0 = Release|x64
+		{7A289C51-7DBB-4FD9-8201-EE75D3C50ACA}.Release|x86.ActiveCfg = Release|Win32
+		{7A289C51-7DBB-4FD9-8201-EE75D3C50ACA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

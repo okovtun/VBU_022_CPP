@@ -45,6 +45,11 @@ public:
 		copy(other.Root);
 		cout << "CopyConstructor:" << this << endl;
 	}
+	Tree(const initializer_list<int>& il) :Tree()
+	{
+		for (int const* it = il.begin(); it != il.end(); it++)
+			insert(*it, this->Root);
+	}
 	~Tree()
 	{
 		clear(this->Root);
@@ -55,6 +60,10 @@ public:
 	void insert(int Data)
 	{
 		insert(Data, this->Root);
+	}
+	void erase(int Data)
+	{
+		erase(Data, this->Root);
 	}
 	int minValue()
 	{
@@ -101,11 +110,40 @@ private:
 			else
 				insert(Data, Root->pLeft);
 		}
-		else if (Data > Root->Data)
+		else //if (Data > Root->Data)
 		{
 			if (Root->pRight)insert(Data, Root->pRight);
 			else Root->pRight = new Element(Data);
 		}
+	}
+	void erase(int Data, Element*& Root)
+	{
+		if (Root == nullptr)return;
+		erase(Data, Root->pLeft);
+		erase(Data, Root->pRight);
+		if (Data == Root->Data)
+		{
+			if (Root->is_leaf())
+			{
+				delete Root;
+				Root = nullptr;
+			}
+			else
+			{
+				if (Root->pLeft)
+				{
+					Root->Data = maxValue(Root->pLeft);
+					erase(maxValue(Root->pLeft), Root->pLeft);
+				}
+				else
+				{
+					Root->Data = minValue(Root->pRight);
+					erase(minValue(Root->pRight), Root->pRight);
+				}
+			}
+			//return;
+		}
+		
 	}
 	int minValue(Element* Root)
 	{
@@ -153,23 +191,39 @@ private:
 	}
 };
 
+//#define ERASE_CHECK
+
 void main()
 {
 	setlocale(LC_ALL, "Russian");
 	int n;	//Размер дерева
-	cout << "Введите количество элементов: "; cin >> n;
-	Tree t;
-	for (int i = 0; t.size() < n/*,i<n*/; i++)
+	Tree t = { 50, 25, 16, 32, 8, 85, 64, 62, 80, 91, 98 };
+	/*cout << "Введите количество элементов: "; cin >> n;
+	for (int i = 0; t.size() < n, i<n; i++)
 	{
 		t.insert(rand() % 100);
-		//cout << rand() % 100 << tab;
-	}
+	}*/
 	t.print();
 	cout << "Минимальное значение в дереве: " << t.minValue() << endl;
 	cout << "Минимальное значение в дереве: " << t.maxValue() << endl;
 	cout << "Количетво элементов дерева: " << t.size() << endl;
 	cout << "Сумма элементов дерева: " << t.sum() << endl;
 	cout << "Среднее арифметическое элементов дерева: " << t.avg() << endl;
-	Tree t2 = t;
+	int value;	cout << "Введите удаляемое значение: "; cin >> value;
+	t.erase(value);
+	t.print();
+	cout << "Минимальное значение в дереве: " << t.minValue() << endl;
+	cout << "Минимальное значение в дереве: " << t.maxValue() << endl;
+	cout << "Количетво элементов дерева: " << t.size() << endl;
+	cout << "Сумма элементов дерева: " << t.sum() << endl;
+	cout << "Среднее арифметическое элементов дерева: " << t.avg() << endl;
+
+#ifdef ERASE_CHECK
+	Tree t2 = { 50, 25, 16, 32, 8, 85, 64, 62, 80, 91, 98 };
 	t2.print();
+	int value;	cout << "Введите удаляемое значение: "; cin >> value;
+	t2.erase(value);
+	t2.print();
+#endif // ERASE_CHECK
+
 }
