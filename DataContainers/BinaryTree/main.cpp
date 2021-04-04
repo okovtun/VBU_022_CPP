@@ -30,10 +30,88 @@ class Tree
 		friend class Tree;
 	}*Root;
 public:
+	class Iterator
+	{
+		Element* Root;
+		Element* Temp;
+	public:
+		Iterator(Element* Root) :Temp(Temp)
+		{
+			cout << "ItConstructor:\t" << this << endl;
+		}
+		~Iterator()
+		{
+			cout << "ItDestructor:\t" << this << endl;
+		}
+		const int& operator*()const
+		{
+			return Temp->Data;
+		}
+		int& operator*()
+		{
+			return Temp->Data;
+		}
+		/*operator Element* ()const
+		{
+			return Temp;
+		}*/
+		Element*& operator->()
+		{
+			return Temp;
+		}
+		bool operator==(const Iterator& other)const
+		{
+			return this->Temp == other.Temp;
+		}
+		bool operator!=(const Iterator& other)const
+		{
+			return !(*this == other);
+		}
+		Iterator& operator++()
+		{
+			//????????????????????????????????????????
+			//find_next();
+			return *this;
+		}
+		Iterator& operator++(int)
+		{
+			//????????????????????????????????????????
+			return *this;
+		}
+	};
+	Iterator begin()
+	{
+		return find(minValue(this->Root), this->Root);
+	}
+	Iterator end()
+	{
+		return find(maxValue(this->Root), this->Root);
+	}
+	Element*& find(int Data, Element*& Root)
+	{
+		if (Root == nullptr)return Root;
+		find(Data, Root->pLeft);
+		find(Data, Root->pRight);
+		if (Root->Data == Data)
+		{
+			return Root;
+		}
+	}
+	Element*& find_next(Element*& Root, Element* Parent = nullptr)
+	{
+		if (Root->pLeft == nullptr)return Root;
+		if (Root->pRight)find_next(Root->pRight, Root);
+		find_next(Root->pLeft, Root);
+	}
+	Element*& find_next()
+	{
+		find_next(this->Root);
+	}
+	////////////////////////////////////////////////////////////////////
 	Element* getRoot()
 	{
 		return this->Root;
-	}
+}
 	Tree() :Root(nullptr)
 	{
 #ifdef DEBUG
@@ -143,7 +221,7 @@ private:
 			}
 			//return;
 		}
-		
+
 	}
 	int minValue(Element* Root)
 	{
@@ -189,8 +267,9 @@ private:
 		cout << Root->Data << tab;
 		print(Root->pRight);
 	}
-};
+	};
 
+#define BASE_CHECK
 //#define ERASE_CHECK
 
 void main()
@@ -217,6 +296,17 @@ void main()
 	cout << "Количетво элементов дерева: " << t.size() << endl;
 	cout << "Сумма элементов дерева: " << t.sum() << endl;
 	cout << "Среднее арифметическое элементов дерева: " << t.avg() << endl;
+	///////////////////////////////////////////////////////////////////////////////////////////
+	for (Tree::Iterator it = t.begin(); it != t.end(); ++it)
+	{
+		cout << *it << tab;
+	}
+	cout << endl;
+	/*for (int i : t)
+	{
+		cout << i << tab;
+	}
+	cout << endl;*/
 
 #ifdef ERASE_CHECK
 	Tree t2 = { 50, 25, 16, 32, 8, 85, 64, 62, 80, 91, 98 };
