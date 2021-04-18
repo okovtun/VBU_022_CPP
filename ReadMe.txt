@@ -1,7 +1,32 @@
 ﻿https://www.youtube.com/watch?v=keX4ivr9Ytc&list=PLeqyOOqxeiINBBW5KUmcf-M4_wfb4yqKp&index=1&t=205s
 https://github.com/okovtun/VBU_022_CPP
 
+TOREAD:
+http://cplusplus.com/reference/regex/
+https://www.boost.org/
+https://www.qt.io/ - Разработка кроссплатформенных приложений на C++
+https://doc.qt.io/qt-5/gettingstarted.html#create-your-first-applications
+https://doc.qt.io/qt-5/qtwidgets-tutorials-notepad-example.html
+https://doc.qt.io/qt-5/qtdoc-tutorials-alarms-example.html
+https://hh.ru/vacancy/42462084?query=C%20%20
+https://hh.ru/vacancy/43394134?query=C%20%20
+https://hh.ru/vacancy/42462084?query=C%20%20
+https://hh.ru/vacancy/43824819?query=C%20%20
+https://hh.ru/vacancy/42482001?query=C%20%20
+https://hh.ru/vacancy/43964782?query=C%20%20
+
+GameDev:
+https://www.unrealengine.com/en-US/
+OpenGL/DirectX
+
 TODO:
+ГИБДД:
+-номера автомобилей можно проверять по регулярным выражениям;
+-базу можно сохранять в CSV-файл, и загружать ее из файла при запуске программы;
+						CSV-Comma Separated Values
+	BI 3244 ВА, ...(номер статьи), DD.MM.YYYY;
+
+DONE:
 В BinaryTree добавить:
 CopyAssignment();
 ILconstructor;	//Tree t = {3, 5, ....};
